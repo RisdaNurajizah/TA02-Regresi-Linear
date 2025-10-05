@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Prediksi Harga Rumah</title>
+    <style>
+        body {
+            font-family: Arial;
+            margin: 50px;
+            background: #f9f9f9;
+        }
+
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            width: 400px;
+            margin: auto;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+        }
+
+        button {
+            background: #4CAF50;
+            color: white;
+            padding: 10px;
+            border: none;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Prediksi Harga Rumah 🏠</h2>
+        <form action="/predict" method="post">
+            <input type="text" name="area" placeholder="Luas Rumah (m2)" required><br>
+            <input type="text" name="bedrooms" placeholder="Jumlah Kamar Tidur" required><br>
+            <input type="text" name="bathrooms" placeholder="Jumlah Kamar Mandi" required><br>
+            <input type="text" name="stories" placeholder="Jumlah Lantai" required><br>
+            <input type="text" name="parking" placeholder="Jumlah Parkir" required><br>
+            <input type="text" name="mainroad" placeholder="Mainroad (1/0)" required><br>
+            <input type="text" name="guestroom" placeholder="Guestroom (1/0)" required><br>
+            <input type="text" name="basement" placeholder="Basement (1/0)" required><br>
+            <input type="text" name="hotwaterheating" placeholder="Hot Water Heating (1/0)" required><br>
+            <input type="text" name="airconditioning" placeholder="Air Conditioning (1/0)" required><br>
+            <input type="text" name="prefarea" placeholder="Preferred Area (1/0)" required><br>
+            <input type="text" name="semi_furnished" placeholder="Semi Furnished (1/0)" required><br>
+            <input type="text" name="unfurnished" placeholder="Unfurnished (1/0)" required><br>
+            <button type="submit" class="btn btn-success">Prediksi Harga</button>
+        </form>
+
+        {% if prediction_text %}
+        <h3>{{ prediction_text }}</h3>
+        {% endif %}
+
+    </div>
+</body>
+
+</html>
