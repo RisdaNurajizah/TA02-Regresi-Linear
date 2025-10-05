@@ -1,63 +1,83 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <title>Prediksi Harga Rumah</title>
-    <style>
-        body {
-            font-family: Arial;
-            margin: 50px;
-            background: #f9f9f9;
-        }
-
-        .container {
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            width: 400px;
-            margin: auto;
-        }
-
-        input {
-            width: 100%;
-            padding: 10px;
-            margin: 5px 0;
-        }
-
-        button {
-            background: #4CAF50;
-            color: white;
-            padding: 10px;
-            border: none;
-            width: 100%;
-        }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IMPLEMENTASI ALGORITMA REGRESI LINEAR UNTUK
+        MEMPREDIKSI HARGA RUMAH BERDASARKAN FITUR-FITUR
+        PADA DATASET HOUSING PRICES</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 
 <body>
     <div class="container">
-        <h2>Prediksi Harga Rumah 🏠</h2>
-        <form action="/predict" method="post">
-            <input type="text" name="area" placeholder="Luas Rumah (m2)" required><br>
-            <input type="text" name="bedrooms" placeholder="Jumlah Kamar Tidur" required><br>
-            <input type="text" name="bathrooms" placeholder="Jumlah Kamar Mandi" required><br>
-            <input type="text" name="stories" placeholder="Jumlah Lantai" required><br>
-            <input type="text" name="parking" placeholder="Jumlah Parkir" required><br>
-            <input type="text" name="mainroad" placeholder="Mainroad (1/0)" required><br>
-            <input type="text" name="guestroom" placeholder="Guestroom (1/0)" required><br>
-            <input type="text" name="basement" placeholder="Basement (1/0)" required><br>
-            <input type="text" name="hotwaterheating" placeholder="Hot Water Heating (1/0)" required><br>
-            <input type="text" name="airconditioning" placeholder="Air Conditioning (1/0)" required><br>
-            <input type="text" name="prefarea" placeholder="Preferred Area (1/0)" required><br>
-            <input type="text" name="semi_furnished" placeholder="Semi Furnished (1/0)" required><br>
-            <input type="text" name="unfurnished" placeholder="Unfurnished (1/0)" required><br>
-            <button type="submit" class="btn btn-success">Prediksi Harga</button>
+        <h1>🏠 Prediksi Harga Rumah</h1>
+        <form action="/predict" method="POST">
+            <div class="form-grid">
+                <label>Area (sq ft)</label>
+                <input type="number" name="area" required>
+
+                <label>Bedrooms</label>
+                <input type="number" name="bedrooms" required>
+
+                <label>Bathrooms</label>
+                <input type="number" name="bathrooms" required>
+
+                <label>Stories</label>
+                <input type="number" name="stories" required>
+
+                <label>Main Road</label>
+                <select name="mainroad">
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </select>
+
+                <label>Guest Room</label>
+                <select name="guestroom">
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </select>
+
+                <label>Basement</label>
+                <select name="basement">
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </select>
+
+                <label>Hot Water Heating</label>
+                <select name="hotwaterheating">
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </select>
+
+                <label>Air Conditioning</label>
+                <select name="airconditioning">
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </select>
+
+                <label>Parking</label>
+                <input type="number" name="parking" required>
+
+                <label>Preferred Area</label>
+                <select name="prefarea">
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </select>
+
+                <label>Furnishing Status</label>
+                <select name="furnishingstatus">
+                    <option value="furnished">Furnished</option>
+                    <option value="semi-furnished">Semi-Furnished</option>
+                    <option value="unfurnished">Unfurnished</option>
+                </select>
+            </div>
+            <button type="submit">Prediksi Harga 💸</button>
         </form>
 
-        {% if prediction_text %}
+        <hr>
         <h3>{{ prediction_text }}</h3>
-        {% endif %}
-
     </div>
 </body>
 

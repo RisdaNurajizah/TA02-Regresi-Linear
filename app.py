@@ -14,13 +14,28 @@ def home():
 @app.route('/predict', methods=['POST'])
 def predict():
     # Ambil nilai dari form
-    features = [float(x) for x in request.form.values()]
-    final_features = [np.array(features)]
+    form_values = []
+    for value in request.form.values():
+        if value.lower() == 'yes':
+            form_values.append(1.0)
+        elif value.lower() == 'no':
+            form_values.append(0.0)
+        elif value.lower() == 'furnished':
+            form_values.extend([1.0, 0.0])  # contoh encoding dummy
+        elif value.lower() == 'semi-furnished':
+            form_values.extend([0.0, 1.0])
+        elif value.lower() == 'unfurnished':
+            form_values.extend([0.0, 0.0])
+        else:
+            form_values.append(float(value))
+
+    # Ubah jadi array untuk model
+    final_features = [form_values]
     
     # Prediksi
     prediction = model.predict(final_features)
-    
-    output = round(prediction[0], 2)
+    output = f"Rp {prediction[0]:,.2f}".replace(",", ".").replace(".", ",", 1)
+
 
     return render_template('index.html', prediction_text=f'Perkiraan harga rumah: {output}')
 
